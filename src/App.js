@@ -7,6 +7,7 @@ import Skills from './components/pages/skills/Skills';
 import Experiences from './components/pages/experiences/Experiences';
 import Educations from './components/pages/educations/Educations';
 import Portfolios from './components/pages/portfolios/Portfolios';
+import SnakeGame from './components/pages/snake/SnakeGame';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/experiences" component={Experiences} />
         <Route path="/educations" component={Educations} />
         <Route path="/portfolios" component={Portfolios} />
+        <Route path="/snake" component={SnakeGame} />
       </Switch>
     </Router>
   );

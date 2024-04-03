@@ -157,6 +157,20 @@ class ResAppBar extends Component {
                             Ausbildung
                         </Link>
                     </Typography>
+                    <Typography variant="subheading" className={classes.padding} color="inherit" >
+                        <Link to='/snake'>
+                            <IconButton
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-haspopup="true"
+                                color="inherit"
+                                style={{ paddingTop: "5px" }}
+                            >
+                                <Icon style={{ marginRight: "5px" }}>gamepad</Icon>
+                            </IconButton>
+                            Play Snake
+                        </Link>
+                    </Typography>
                 </Toolbar>
             </AppBar>
         )
