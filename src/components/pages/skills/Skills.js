@@ -50,7 +50,7 @@ export default function Skills() {
           </div>
           <div className="row">
             <div className="col s6">
-              <p>Node JS</p>
+              <p>Node.js</p>
               <div className="progress grey lighten-1">
                 <div
                   className="determinate brown lighten-2"

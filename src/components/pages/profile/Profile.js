@@ -11,7 +11,7 @@ export default function Profile() {
 					<span className='card-title activator grey-text text-darken-4'>
 						Ulrich
 					</span>
-					<p>Full Stack Developer</p>
+					<p>Full Stack Developer / DevOps Engineer</p>
 				</div>
 			</div>
 		</div>
