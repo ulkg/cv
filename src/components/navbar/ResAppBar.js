@@ -42,7 +42,9 @@ export default function DrawerAppBar() {
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
             <Typography variant="h6" sx={{ my: 2, color: '#fff' }}>
-                Ulrich
+                <Link to='/'>
+                    Ulrich
+                </Link>
             </Typography>
             <Divider />
             <List>
