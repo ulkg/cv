@@ -1,194 +1,142 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import {
-    AppBar, Toolbar, Typography, List, ListItem,
-    withStyles, Grid, SwipeableDrawer
-} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import MenuIcon from '@mui/icons-material/Menu';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import { HashLink as Link } from 'react-router-hash-link';
-import Icon from '@material-ui/core/Icon';
-import IconButton from '@material-ui/core/IconButton';
+import Icon from '@mui/material/Icon';
 
-const styleSheet = {
-    list: {
-        width: 200,
+const drawerWidth = 240;
+const navItems = [
+    {
+        name: 'Skills', path: '/skills', icon: 'content_copy'
     },
-    padding: {
-        paddingRight: 30,
-        cursor: "pointer",
+    {
+        name: 'Erfahrung', path: '/experiences', icon: 'work'
     },
+    {
+        name: 'Ausbildung', path: '/educations', icon: 'school'
+    },
+    {
+        name: 'Play Snake', path: '/snake', icon: 'gamepad'
+    },
+];
 
-    sideBarIcon: {
-        padding: 0,
-        color: "white",
-        cursor: "pointer",
-    }
-}
+export default function DrawerAppBar() {
+    const { window } = Window;
+    const [mobileOpen, setMobileOpen] = React.useState(false);
 
-class ResAppBar extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { drawerActivate: false, drawer: false };
-        this.createDrawer = this.createDrawer.bind(this);
-        this.destroyDrawer = this.destroyDrawer.bind(this);
-    }
+    const handleDrawerToggle = () => {
+        setMobileOpen((prevState) => !prevState);
+    };
 
-    componentWillMount() {
-        if (window.innerWidth <= 600) {
-            this.setState({ drawerActivate: true });
-        }
+    const drawer = (
+        <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+            <Typography variant="h6" sx={{ my: 2, color: '#fff' }}>
+                Ulrich
+            </Typography>
+            <Divider />
+            <List>
+                {navItems.map((item) => (
+                    <ListItem key={`${item.name}mobile`} disablePadding>
+                        <ListItemButton sx={{ textAlign: 'center' }}>
+                            <ListItemText primary={item.name} sx={{ color: '#fff' }} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
+        </Box>
+    );
 
-        window.addEventListener('resize', () => {
-            if (window.innerWidth <= 600) {
-                this.setState({ drawerActivate: true });
-            }
-            else {
-                this.setState({ drawerActivate: false })
-            }
-        });
-    }
+    const container = window !== undefined ? () => window().document.body : undefined;
 
-    //Small Screens
-    createDrawer() {
-        return (
-            <div>
-                <AppBar className='grey darken-4'>
-                    <Toolbar className='grey darken-4'>
-                        <Grid container direction="row" justify="space-between" alignItems="center" >
-                            <MenuIcon
-                                className={this.props.classes.sideBarIcon}
-                                onClick={() => { this.setState({ drawer: true }) }} />
-
-                            <Typography color="inherit" variant="headline">
-                                <Link to='/' className='brand-logo'>
-                                    Ulrich
-							    </Link>
-                            </Typography>
-                        </Grid>
-                    </Toolbar>
-                </AppBar>
-
-                <SwipeableDrawer
-                    open={this.state.drawer}
-                    onClose={() => { this.setState({ drawer: false }) }}
-                    onOpen={() => { this.setState({ drawer: true }) }}>
-
-                    <div  className='grey darken-4' style = {{ color: "white"}}
-                        tabIndex={0}
-                        role="button"
-                        onClick={() => { this.setState({ drawer: false }) }}
-                        onKeyDown={() => { this.setState({ drawer: false }) }}>
-
-                        <List className={this.props.classes.list}>
-                            <ListItem key={1} button divider> <Link to='/skills'>Skills</Link>  </ListItem>
-                            <ListItem key={2} button divider> <Link to='/experiences'>Erfahrung</Link></ListItem>
-                            <ListItem key={3} button divider><Link to='/educations'> Ausbildung </Link></ListItem>
-                        </List>
-
-                    </div>
-                </SwipeableDrawer>
-
-            </div>
-        );
-    }
-
-    //Larger Screens
-    destroyDrawer() {
-        const { classes } = this.props
-        return (
-            <AppBar className='grey darken-4'>
+    return (
+        <Box sx={{ display: 'flex' }}>
+            <CssBaseline />
+            <AppBar component="nav">
                 <Toolbar>
-                    <Typography variant="headline" style={{ flexGrow: 1 }} color="inherit" >
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        onClick={handleDrawerToggle}
+                        sx={{ mr: 2, display: { sm: 'none' } }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography
+                        variant="h6"
+                        component="div"
+                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                    >
                         <Link to='/' className='brand-logo'>
-                        <IconButton
-                                edge="end"
-                                aria-label="account of current user"
-                                aria-haspopup="true"
-                                color="inherit"
-                                style={{ paddingTop: "5px" }}
-                            >
                             Ulrich
-                            </IconButton>
                         </Link>
                     </Typography>
-
-                    <Typography variant="subheading" className={classes.padding} color="inherit" >
-                        <Link to='/skills'>
-                            <IconButton
-                                edge="end"
-                                aria-label="account of current user"
-                                aria-haspopup="true"
-                                color="inherit"
-                                style={{ paddingTop: "5px" }}
-                            >
-                                <Icon style={{ marginRight: "5px" }}>content_copy</Icon>
-                            </IconButton>
-                            Skills
-                        </Link>
-                    </Typography>
-
-
-                    <Typography variant="subheading" className={classes.padding} color="inherit" >
-                        <Link to='/experiences'>
-                            <IconButton
-                                edge="end"
-                                aria-label="account of current user"
-                                aria-haspopup="true"
-                                color="inherit"
-                                style={{ paddingTop: "5px" }}
-                            >
-                                <Icon style={{ marginRight: "5px" }}>work</Icon>
-                            </IconButton>
-                            Erfahrung
-                        </Link>
-                    </Typography>
-
-                    <Typography variant="subheading" className={classes.padding} color="inherit" >
-                        <Link to='/educations'>
-                            <IconButton
-                                edge="end"
-                                aria-label="account of current user"
-                                aria-haspopup="true"
-                                color="inherit"
-                                style={{ paddingTop: "5px" }}
-                            >
-                                <Icon style={{ marginRight: "5px" }}>school</Icon>
-                            </IconButton>
-                            Ausbildung
-                        </Link>
-                    </Typography>
-                    <Typography variant="subheading" className={classes.padding} color="inherit" >
-                        <Link to='/snake'>
-                            <IconButton
-                                edge="end"
-                                aria-label="account of current user"
-                                aria-haspopup="true"
-                                color="inherit"
-                                style={{ paddingTop: "5px" }}
-                            >
-                                <Icon style={{ marginRight: "5px" }}>gamepad</Icon>
-                            </IconButton>
-                            Play Snake
-                        </Link>
-                    </Typography>
+                    <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                        {navItems.map((item) => (
+                            <Typography variant="subheading" color="inherit" key={item.name} sx={{ paddingRight: '30px', cursor: 'pointer' }}>
+                                <Link to={item.path}>
+                                    <IconButton
+                                        edge="end"
+                                        aria-label="account of current user"
+                                        aria-haspopup="true"
+                                        color="inherit"
+                                        sx={{
+                                            paddingTop: "5px", color: '#fff', '&:focus': {
+                                                outline: 'none',
+                                                backgroundColor: 'transparent',
+                                            },
+                                        }}
+                                    >
+                                        <Icon sx={[
+                                            {
+                                                '&:focus': {
+                                                    color: 'red',
+                                                    backgroundColor: 'white',
+                                                },
+                                            },
+                                            { marginRight: '8px' }
+                                        ]} style={{
+                                            '&:focus': {
+                                                color: 'red',
+                                                backgroundColor: 'white',
+                                            },
+                                        }}>{item.icon}</Icon>
+                                    </IconButton>
+                                    {item.name}
+                                </Link>
+                            </Typography>
+                        ))}
+                    </Box>
                 </Toolbar>
             </AppBar>
-        )
-    }
-
-    render() {
-        return (
             <nav>
-                {this.state.drawerActivate ? this.createDrawer() : this.destroyDrawer()}
+                <Drawer
+                    container={container}
+                    variant="temporary"
+                    open={mobileOpen}
+                    onClose={handleDrawerToggle}
+                    ModalProps={{
+                        keepMounted: true, // Better open performance on mobile.
+                    }}
+                    sx={{
+                        display: { xs: 'block', sm: 'none' },
+                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                    }}
+                >
+                    {drawer}
+                </Drawer>
             </nav>
-        );
-    }
+        </Box>
+    );
 }
-
-ResAppBar.propTypes = {
-    classes: PropTypes.object.isRequired
-};
-
-
-
-export default withStyles(styleSheet)(ResAppBar);

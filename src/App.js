@@ -2,6 +2,7 @@ import React from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import RestAppBar from './components/navbar/ResAppBar';
 import Home from './components/pages/Home';
 import Skills from './components/pages/skills/Skills';
 import Experiences from './components/pages/experiences/Experiences';
@@ -13,6 +14,7 @@ import './App.css';
 function App() {
   return (
     <Router>
+      <RestAppBar />
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route path='/skills' element={<Skills />} />

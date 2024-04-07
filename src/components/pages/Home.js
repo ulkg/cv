@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ResAppBar from '../../components/navbar/ResAppBar';
 import Profile from '../../components/pages/profile/Profile';
 import About from '../../components/pages/about/About';
 import Skills from '../../components/pages/skills/Skills';
@@ -11,7 +10,6 @@ export default class Home extends Component {
 	render() {
 		return (
 			<section>
-				<ResAppBar />
 				<div className='container'>
 					<div className='row'>
 						<div className='col s12 m3'>
