@@ -1,6 +1,4 @@
 import React from 'react';
-import 'materialize-css/dist/css/materialize.min.css';
-import 'materialize-css/dist/js/materialize.min.js';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import RestAppBar from './components/navbar/ResAppBar';
 import Home from './components/pages/Home';
