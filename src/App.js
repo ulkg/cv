@@ -1,7 +1,7 @@
 import React from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/pages/Home';
 import Skills from './components/pages/skills/Skills';
 import Experiences from './components/pages/experiences/Experiences';
@@ -13,14 +13,14 @@ import './App.css';
 function App() {
   return (
     <Router>
-      <Route exact path="/" component={Home} />
-      <Switch>
-        <Route path="/skills" component={Skills} />
-        <Route path="/experiences" component={Experiences} />
-        <Route path="/educations" component={Educations} />
-        <Route path="/portfolios" component={Portfolios} />
-        <Route path="/snake" component={SnakeGame} />
-      </Switch>
+      <Routes>
+        <Route exact path='/' element={<Home />} />
+        <Route path='/skills' element={<Skills />} />
+        <Route path='/experiences' element={<Experiences />} />
+        <Route path='/educations' element={<Educations />} />
+        <Route path='/portfolios' element={<Portfolios />} />
+        <Route path='/snake' element={<SnakeGame />} />
+      </Routes>
     </Router>
   );
 }
