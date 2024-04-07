@@ -49,7 +49,9 @@ export default function DrawerAppBar() {
                 {navItems.map((item) => (
                     <ListItem key={`${item.name}mobile`} disablePadding>
                         <ListItemButton sx={{ textAlign: 'center' }}>
-                            <ListItemText primary={item.name} sx={{ color: '#fff' }} />
+                            <Link to={item.path}>
+                                <ListItemText primary={item.name} sx={{ color: '#fff' }} />
+                            </Link>
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -106,12 +108,7 @@ export default function DrawerAppBar() {
                                                 },
                                             },
                                             { marginRight: '8px' }
-                                        ]} style={{
-                                            '&:focus': {
-                                                color: 'red',
-                                                backgroundColor: 'white',
-                                            },
-                                        }}>{item.icon}</Icon>
+                                        ]}>{item.icon}</Icon>
                                     </IconButton>
                                     {item.name}
                                 </Link>
@@ -132,6 +129,10 @@ export default function DrawerAppBar() {
                     sx={{
                         display: { xs: 'block', sm: 'none' },
                         '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        '&:focus': {
+                            outline: 'none',
+                            backgroundColor: 'transparent',
+                        },
                     }}
                 >
                     {drawer}
